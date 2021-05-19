@@ -1,25 +1,8 @@
 <?php 
     include "db.php";
     include "functions.php";
-
-    if(isset($_POST['submit'])){
-        $id = $_POST['id'];
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        $query = "UPDATE users SET ";
-        $query .= "username='$username', ";
-        $query .= "password='$password' ";
-        $query .= "WHERE id=$id";
-
-        $result = mysqli_query($connection, $query);
-
-        if(!result){
-            
-        }
-
-
-    }
+    
+    UpdateTable();
 ?>
 
 
@@ -39,6 +22,7 @@
 
     <div class="container">
         <div class="col-sm-6">
+            <h1 class="text-center">Update</h1>
             <form action="login_update.php" method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
@@ -61,6 +45,7 @@
 
                 <input class="btn btn-primary" type="submit" name="submit" value="UPDATE">
             </form>
+
         </div>
     </div> <!-- end container -->
 

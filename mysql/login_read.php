@@ -36,7 +36,7 @@
 
     <div class="container">
         <div class="col-sm-6">
-        
+        <h1 class="text-center">Read</h1>
         <?php
             // while($row = mysqli_fetch_row($result)){
             //     print_r($row);
