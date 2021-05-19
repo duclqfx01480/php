@@ -1,22 +1,42 @@
-<?php include "db.php";?>
+<?php include "db.php"; ?>
 
 <?php
-
-    function CreateRow(){
+    function readRows(){
         global $connection;
 
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        $query = "INSERT INTO users(username, password) ";
-        $query .= "VALUES ('$username', '$password')";
+        $query = "SELECT * FROM users;";
 
         $result = mysqli_query($connection, $query);
 
         if(!$result){
             die('Query Failed' . mysqli_error());
-        }else{
-            echo "Record created!";
+        }
+
+        // start
+        while($row = mysqli_fetch_assoc($result)){
+            print_r($row);
+        }
+        // end 
+
+    }
+
+    function CreateRow(){
+        if(isset($_POST['submit'])){
+            global $connection;
+
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+
+            $query = "INSERT INTO users(username, password) ";
+            $query .= "VALUES ('$username', '$password')";
+
+            $result = mysqli_query($connection, $query);
+
+            if(!$result){
+                die('Query Failed' . mysqli_error());
+            }else{
+                echo "Record created!";
+            }
         }
     }
     function showAllData(){
