@@ -27,6 +27,18 @@
             $username = $_POST['username'];
             $password = $_POST['password'];
 
+            // SQL Injection - Clean up the username before create new record
+            $username = mysqli_real_escape_string($connection, $username);
+            $password = mysqli_real_escape_string($connection, $password);
+
+            // password encryption
+            $hashFormat = "$2y$10$";
+            $salt = "iusesomecrazystrings22";
+            $hashF_and_salt  = $hashFormat . $salt;
+
+            // password = password after encryption
+            $password  = crypt($password, $hashF_and_salt);
+
             $query = "INSERT INTO users(username, password) ";
             $query .= "VALUES ('$username', '$password')";
 
@@ -64,6 +76,10 @@
             $username = $_POST['username'];
             $password = $_POST['password'];
             $id = $_POST['id'];
+
+            // SQL Injection - clean up the username and password before updating
+            $username = mysqli_real_escape_string($connection, $username);
+            $password = mysqli_real_escape_string($connection, $password);
     
             $query = "UPDATE users SET ";
             $query .= "username = '$username', ";
