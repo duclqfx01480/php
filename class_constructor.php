@@ -14,12 +14,6 @@
 
     }
 
-    $bmw = new Car();
-
-
+    $bmw = new Car();    
     
-    
-    
-
-
 ?>

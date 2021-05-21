@@ -26,8 +26,5 @@
     $jet = new Plane();
     $jet->MoveWheels();
     echo $jet->wheels;
-    
-    
-
 
 ?>

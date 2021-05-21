@@ -4,7 +4,6 @@
         static $wheels = 4;
         var $hood = 1;
 
-
         // Methods
         function MoveWheels(){
             echo Car::$wheels = 10;
