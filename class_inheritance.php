@@ -21,10 +21,10 @@
     }
 
     class Plane extends Car{
-        var $wheels = 20;
     }
 
     $jet = new Plane();
+    $jet->MoveWheels();
     echo $jet->wheels;
     
     
