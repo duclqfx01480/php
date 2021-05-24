@@ -14,14 +14,20 @@
 <body>
 
     <?php
-        //defines variables and set to empty values
+        // khai báo các biến để lấy dữ liệu từ form
         $name = $email = $website= $comment = $gender = "";
+
+        // khai báo các biến (trạng thái lỗi)
         $nameErr = $emailErr = $websiteErr = $commentErr = $genderErr = "";
 
+        // nếu phương thức gửi dữ liệu là POST thì lấy ra các dữ liệu trong $_POST
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             if(empty($_POST["name"])){
+                // nếu giá trị của "name" trong $_POST là rỗng
+                // thì gán giá trị cho biến báo lỗi của name
                 $nameErr = "Name is required";
             }else{
+                // ngược lại thì thực hiện validate biến $name với hàm validateInput bên dưới
                 $name = validateInput($_POST["name"]);
             }
 
@@ -52,9 +58,14 @@
         }
 
         function validateInput($data){
+            // loại bỏ các khoảng trắng không cần thiết
             $data = trim($data);
+            // loại bỏ các dấu slash
             $data = stripslashes($data);
+            // chuyển đổi các ký tự đặc biệt thành mã html
+            // ngăn việc chèn code không mong muốn
             $data = htmlspecialchars($data);
+
             return $data;
         }
     ?>
@@ -64,14 +75,17 @@
     <p><span class="error">* required field</span></p>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         Name: <input type="text" name="name">
+        <!-- chèn thẻ span để hiển thị thông báo lỗi tương ứng -->
         <span class="error">* <?php echo $nameErr ?> </span>
         <br><br>
         
         Email: <input type="email" name="email">
+        <!-- chèn thẻ span để hiển thị thông báo lỗi tương ứng -->
         <span class="error">* <?php echo $emailErr ?> </span>
         <br><br>
         
         Website: <input type="text" name="website">
+        <!-- chèn thẻ span để hiển thị thông báo lỗi tương ứng -->
         <span class="error">* <?php echo $websiteErr ?> </span>
         <br><br>
         
@@ -84,12 +98,14 @@
         <label for="male">Male</label>
         <input type="radio" name="gender" id="female" value="female">
         <label for="female">Female</label>
+        <!-- chèn thẻ span để hiển thị thông báo lỗi tương ứng -->
         <span class="error">* <?php echo $genderErr ?> </span>
         <br><br>
 
         <input type="submit" name="submit" value="Submit">    
     </form>
 
+    <!-- hiển thị các dữ liệu ra màn hình -->
     <?php
         echo "<h2>Your input</h2>";
         echo $name . "<br>";
