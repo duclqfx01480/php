@@ -8,7 +8,7 @@
 <body>
 
     <?php
-        //defines variables and set to empty values
+        //defines các biến
         $name = $email = $website= $comment = $gender = "";
 
         if($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -19,9 +19,13 @@
             $gender = validateInput($_POST["gender"]);
         }
 
+        // hàm để validate các biến
         function validateInput($data){
+            // loại bỏ các khoảng trắng không cần thiết
             $data = trim($data);
+            // loại bỏ các dấu slash (dấu /)
             $data = stripslashes($data);
+            // chuyển các ký tự đặc biệt thành mã, ngăn việc chèn code không mong muốn
             $data = htmlspecialchars($data);
             return $data;
         }
@@ -29,6 +33,12 @@
     
 
     <h2>Form validation</h2>
+    <!-- Form để submit dữ liệu -->
+    <!--
+        * $_SERVER["PHP_SELF"] sẽ trả về tên file hiện tại (là file đang xem)
+        * htmlspecialchars sẽ chuyển các ký tự đặc biệt như < > thành mã như &lt; và &gt;
+        để ngăn việc chèn các code không mong muốn
+    -->
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         Name: <input type="text" name="name"><br><br>
         Email: <input type="email" name="email"><br><br>
@@ -43,6 +53,7 @@
         <input type="submit" name="submit" value="Submit">    
     </form>
 
+    <!-- đoạn code php bên dưới sẽ hiển thị ra giá trị của các biến -->
     <?php
         echo "<h2>Your input</h2>";
         echo $name . "<br>";
